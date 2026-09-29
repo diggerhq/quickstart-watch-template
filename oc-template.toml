@@ -1,0 +1,26 @@
+schema = 1
+
+[template]
+name = "Quickstart Watch"
+description = "Check your quickstart daily and email the first report, then new issues or blockers."
+default_project_name = "quickstart-watch"
+
+[template.first_run]
+agent = "quickstart-watch"
+prompt = "Run my first quickstart check now. Call watch_settings for the configured URL and report history. Reports may land in spam."
+
+[template.secrets.AGENTMAIL_API_KEY]
+description = "AgentMail API key for report emails and signup verification. Get one at console.agentmail.to."
+required = true
+
+[template.runtime_variables.WATCH_URL]
+description = "Public product or quickstart URL to check daily."
+required = true
+
+[template.runtime_variables.WATCH_EMAIL]
+description = "Your email address for the first report and new issues or blockers. Check spam too."
+required = true
+
+[template.runtime_variables.WATCH_SENDER_INBOX]
+description = "Optional existing AgentMail inbox ID/address. Set this if your account is at its inbox limit or your key is scoped to one inbox. Otherwise a sender is created automatically."
+required = false
