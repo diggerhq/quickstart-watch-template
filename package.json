@@ -3,7 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "deploy": "opencomputer deploy"
+    "deploy": "opencomputer deploy",
+    "test": "node --test test/*.test.js",
+    "validate": "opencomputer template validate .",
+    "postinstall": "npm install --prefix opencomputer/agents/quickstart-watch"
   },
   "dependencies": {
     "@opencomputer/agent": "0.7.5",
