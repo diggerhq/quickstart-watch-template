@@ -10,6 +10,8 @@ test('native installation packages AgentMail, owner settings, first run, databas
  const reactive = JSON.parse(Buffer.from(files.find(f => f.path === '.opencomputer/reactive.json').content, 'base64').toString());
  assert.ok(reactive.connections.includes('agentmail'), 'runtime must select the AgentMail connection');
  assert.ok(reactive.tools.includes('report_stage'));
+ assert.ok(reactive.tools.includes('run_quickstart_command'));
+ assert.ok(!reactive.tools.includes('sandbox_exec'));
  const connection = artifact.httpConnections.find(c => c.id === 'agentmail');
  assert.ok(connection);
  assert.equal(connection.origin, 'https://api.agentmail.to');
