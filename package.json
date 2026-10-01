@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@opencomputer/agent": "0.7.5",
-    "@opencomputer/cli": "0.7.13",
-    "ipaddr.js": "^2.2.0"
+    "@opencomputer/cli": "0.7.13"
   }
 }

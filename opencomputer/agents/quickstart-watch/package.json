@@ -1,1 +1,1 @@
-{"name":"quickstart-watch-agent","private":true,"type":"module","dependencies":{"@opencomputer/agent":"0.7.5","ipaddr.js":"^2.2.0"}}
+{"name":"quickstart-watch-agent","private":true,"type":"module","dependencies":{"@opencomputer/agent":"0.7.5"}}
