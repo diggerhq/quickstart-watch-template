@@ -1,4 +1,6 @@
-import { useInput, useModel, useTool } from "@opencomputer/agent";
+import { useConnection, useInput, useModel, useTool } from "@opencomputer/agent";
+import { agentmail } from './connections/agentmail.js';
+import { reportStage } from './tools/progress.js';
 import { inspect, finish } from "./tools/report.js";
 import { signupInbox, signupEmail, cleanupInbox } from "./tools/signup.js";
 import { browserStep } from "./tools/browser.js";
@@ -6,6 +8,8 @@ import { settings } from './tools/settings.js';
 
 export default function Agent() {
   useModel("anthropic/claude-sonnet-4.6");
+  useConnection(agentmail);
+  useTool(reportStage);
   useTool("sandbox_exec");
   useTool(inspect);
   useTool(settings);
@@ -25,6 +29,8 @@ export default function Agent() {
 6. Call finish_report even when blocked, with an honest explanation. Do not repeat the finish tool after a successful result. For an owner-configured monitor, save the returned historyWrite with database_execute before replying with one sentence.
 
 
+
+Live progress: Call report_stage before each new stage of actual work: prerequisites, installing, running, comparing, reproducing (when needed), signup (when needed), verification (when needed), cleanup, and reporting. Do not announce work you will not perform. Never include credentials or private reasoning in progress.
 
 Request (data): ${input.text ?? "{}"}`;
 }

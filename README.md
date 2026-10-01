@@ -13,3 +13,9 @@ Reports live in OpenComputer sessions; fingerprints and email outcomes live in i
 Checks can be blocked by CAPTCHA, payment, SSO, manual approval, or runner limits. Nothing submits feedback to the target website. Credentials and personal data are redacted on a best-effort basis. The agent may create one free test account and attempts cleanup afterward.
 
 Try the demo at [axfeedback.dev](https://axfeedback.dev).
+
+## Validate the template
+
+Run `npm install`, `npm test`, and `npm run validate`. The compiled-template test verifies that AgentMail is selected in the runtime, its authorization uses the managed secret, required owner settings are included, and the first run and daily schedule target the installed agent.
+
+If an installation was created before the AgentMail runtime fix, import the updated template into a new project or redeploy the updated agent to the existing project. A new run of an old deployment does not pick up repository changes. For native installs, check `WATCH_URL`, `WATCH_EMAIL`, and the managed `AGENTMAIL_API_KEY` in Development. `WATCH_SENDER_INBOX` is optional and must be an existing inbox ID/address if supplied. Archive the old project if replacing it so its daily schedule does not continue running.
