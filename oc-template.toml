@@ -11,7 +11,6 @@ prompt = "Run my first quickstart check now. Call watch_settings for the configu
 
 [template.secrets.AGENTMAIL_API_KEY]
 description = "AgentMail API key for report emails and signup verification. Get one at console.agentmail.to."
-required = true
 
 [template.runtime_variables.WATCH_URL]
 description = "Public product or quickstart URL to check daily."
