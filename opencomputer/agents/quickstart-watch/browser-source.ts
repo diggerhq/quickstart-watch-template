@@ -5,7 +5,9 @@ import {readFile} from 'node:fs/promises';
 import {lookup} from 'node:dns/promises';
 import ipaddr from 'ipaddr.js';
 const input=JSON.parse(await readFile(process.argv[2],'utf8'));
-const context=await chromium.launchPersistentContext(input.profile,{headless:true,args:['--no-sandbox'],timeout:30000});
+let context;
+try {context=await chromium.launchPersistentContext(input.profile,{headless:true,args:['--no-sandbox'],timeout:30000,...(input.executablePath?{executablePath:input.executablePath}:{})});}
+catch {console.log(JSON.stringify({blocked:true,category:'runner',reason:'Chromium could not launch in the isolated runtime. The browser flow was not tested.',nextAction:'Do not retry browser installation. Clean up test resources and call finish_report with verdict blocked.'}));process.exit(0);}
 try {
  await context.route('**/*',async route=>{
   try {const u=new URL(route.request().url());if(!['https:','http:'].includes(u.protocol))return route.abort();const ips=await lookup(u.hostname,{all:true});if(!ips.length||ips.some(a=>ipaddr.process(a.address).range()!=='unicast'))return route.abort();await route.continue();}catch{await route.abort();}
