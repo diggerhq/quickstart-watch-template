@@ -3,6 +3,7 @@ import { redact, type Finding } from "../report-utils.js";
 import { normalizeUrl, publicRequest } from "../network.js";
 import { getNotificationConfig } from '../notification-config.js';
 import { historyWrite, notifyOwner } from '../notifications.js';
+import { documentContent } from '../document-content.js';
 
 export const inspect = defineTool({
   name: "inspect_quickstart",
@@ -12,7 +13,7 @@ export const inspect = defineTool({
     const url = normalizeUrl(String(input.url)).href;
     await reportProgress({ phase: "reading", message: "Reading the quickstart" });
     const page = await publicRequest(url);
-    return { url: page.url, status: page.status, content: page.body.slice(0, 50000) };
+    return { url: page.url, status: page.status, ...documentContent(page.body,page.url) };
   },
 });
 
